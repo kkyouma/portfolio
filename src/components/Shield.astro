@@ -1,0 +1,40 @@
+---
+interface Props {
+  name: string;
+  logo?: string;
+  logoColor?: string;
+  labelColor?: string;
+  color?: string;
+  size?: string | number;
+}
+
+const {
+  name,
+  logo = name,
+  logoColor = "white",
+  labelColor = "#141925",
+  color = labelColor,
+  size = "2rem",
+} = Astro.props;
+
+const finalSize = typeof size == "number" ? `${size}rem` : size;
+
+const baseUrl = "https://img.shields.io/badge";
+let url = `${baseUrl}/${encodeURIComponent(name)}-${encodeURIComponent(name)}`;
+
+const params = new URLSearchParams({
+  style: "flat-square",
+  logo: logo,
+  logoColor: logoColor,
+  labelColor: labelColor,
+  color: color,
+});
+
+const finalUrl = `${url}?${params.toString()}`;
+---
+
+<img
+  src={finalUrl}
+  alt={`${name} badge`}
+  style={`height: ${finalSize}; width auto;`}
+/>

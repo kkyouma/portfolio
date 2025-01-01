@@ -9,13 +9,14 @@ import CallToAction from "../components/CallToAction.astro";
 import Grid from "../components/Grid.astro";
 import Hero from "../components/Hero.astro";
 import Icon from "../components/Icon.astro";
-import SimpleIcon from "../components/SimpleIcon.astro";
+import CustomIcon from "../components/CustomIcon.astro";
 import Pill from "../components/Pill.astro";
 import PortfolioPreview from "../components/PortfolioPreview.astro";
 
 // Page section components
 import ContactCTA from "../components/ContactCTA.astro";
 import Skills from "../components/Skills.astro";
+import Shield from "../components/Shield.astro";
 
 // Content Fetching: List four most recent work projects
 const projects = (await getCollection("work"))
@@ -36,11 +37,10 @@ const projects = (await getCollection("work"))
           align="start"
         >
           <div class="roles">
-            <Pill
-              ><Icon icon="python-icon" size="1.33em" color="#181717" /> Developer</Pill
-            >
-            <Pill><Icon icon="microphone-stage" size="1.33em" /> Speaker</Pill>
-            <Pill><Icon icon="pencil-line" size="1.33em" /> Writer</Pill>
+            <!-- <Pill><Icon icon="sklearn" size="2.33rem" /> Developer</Pill> -->
+            <Shield name="sklearn" logo="scikitlearn" />
+            <Shield name="python" />
+            <Shield name="pandas" />
           </div>
         </Hero>
 
