@@ -9,14 +9,13 @@ import CallToAction from "../components/CallToAction.astro";
 import Grid from "../components/Grid.astro";
 import Hero from "../components/Hero.astro";
 import Icon from "../components/Icon.astro";
-import CustomIcon from "../components/CustomIcon.astro";
 import Pill from "../components/Pill.astro";
 import PortfolioPreview from "../components/PortfolioPreview.astro";
 
 // Page section components
 import ContactCTA from "../components/ContactCTA.astro";
 import Skills from "../components/Skills.astro";
-import Shield from "../components/Shield.astro";
+import Badge from "../components/Badge.astro";
 
 // Content Fetching: List four most recent work projects
 const projects = (await getCollection("work"))
@@ -33,14 +32,20 @@ const projects = (await getCollection("work"))
       <header class="hero">
         <Hero
           title="Hello, I'm Jorge"
-          tagline="I am a Data Analyst living in Talca, Chile."
+          tagline="I am a Industrial Engineer and Data Enthusiast."
           align="start"
         >
+          <ul> 
+            <li>Designing interactive dashboards</li>
+            <li>Deriving actionable insights</li>
+            <li>Optimizing database queries</li>
+          </ul>
           <div class="roles">
-            <!-- <Pill><Icon icon="sklearn" size="2.33rem" /> Developer</Pill> -->
-            <Shield name="sklearn" logo="scikitlearn" />
-            <Shield name="python" />
-            <Shield name="pandas" />
+            <Badge name="SQL" logo="postgresql"/>
+            <Badge name="Python" />
+            <Badge name="Pandas" />
+            <Badge name="Sklearn" logo="scikitlearn" />
+            <Badge name="Git" logo="git" />
           </div>
         </Hero>
 
