@@ -12,7 +12,7 @@ tags:
 
 ## 🎯 **Project Purpose**
 
-This project demonstrates the ability to **extract, structure, and analyze web data** at scale. By scraping MyAnimeList (a top anime and manga database), it transforms unstructured website content into actionable datasets, showcasing skills in automation, problem-solving, and data pipeline creation.
+This project demonstrates the ability to **extract, structure, and analyze web data** at scale. By scraping [MyAnimeList](https://myanimelist.net/) (a top anime and manga database), it transforms unstructured website content into actionable datasets, showcasing skills in automation, problem-solving, and data pipeline creation.
 
 ## ❓ **Why MyAnimeList?**
 
@@ -64,7 +64,7 @@ This project demonstrates the ability to **extract, structure, and analyze web d
 
 ## How it work
 
-<img src="../../../public/assets/myanimelist_uml.png" alt="MAL web scraping UML class diagram" width="600" height="auto">
+<img src="/assets/myanimelist_uml.png" alt="MAL web scraping UML class diagram" width="600" height="auto">
 
 ### 🔧 Core Tools & Libraries
 
