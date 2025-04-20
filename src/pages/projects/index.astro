@@ -1,0 +1,72 @@
+---
+import ProjectCard from "../../components/ui/ProjectCard.astro";
+import { getCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+import BaseLayout from "../../components/layout/BaseLayout.astro";
+import Categories from "../../components/shared/Categories.astro";
+import BaseHero from "../../components/shared/BaseHero.astro";
+import Container from "../../components/ui/Container.astro";
+import ContentList from "../../components/shared/ContentList.astro";
+
+type Project = CollectionEntry<"projects">;
+
+const projects = await getCollection("projects", ({ data }) => {
+  return import.meta.env.PROD ? !data.draft : true;
+});
+
+// Extract unique tech categories from all projects
+const technologies = [
+  ...new Set(projects.flatMap((project: Project) => project.data.techs || [])),
+].sort();
+
+// Featured projects first, then by date
+const sortedProjects = projects.sort((a: Project, b: Project) => {
+  // First sort by featured status
+  if (a.data.featured && !b.data.featured) return -1;
+  if (!a.data.featured && b.data.featured) return 1;
+
+  // Then sort by date if available
+  const dateA = a.data.publishedAt?.getTime() || 0;
+  const dateB = b.data.publishedAt?.getTime() || 0;
+  return dateB - dateA;
+});
+
+// Construct image paths based on project IDs
+function getProjectImagePath(projectId: string): string {
+  return `/images/projects/${projectId}.png`;
+}
+---
+
+<BaseLayout
+  title="Projects"
+  description="Collection of my work and side projects"
+>
+  <Container>
+    <BaseHero
+      title="Projects"
+      description="Collection of my work and side projects"
+    />
+
+    <Categories
+      categories={technologies}
+      currentPath={Astro.url.pathname}
+      basePath="projects"
+    />
+
+    <ContentList>
+      {
+        sortedProjects.map((project) => (
+          <ProjectCard
+            title={project.data.title}
+            description={project.data.description}
+            url={`/projects/${project.id}`}
+            tags={project.data.techs}
+            featured={project.data.featured}
+            imagePath={project.data.imagePath}
+            date={project.data.publishedAt}
+          />
+        ))
+      }
+    </ContentList>
+  </Container>
+</BaseLayout>

@@ -4,4 +4,5 @@ description: "A modern Stack Overflow alternative built with Next.js 13, TypeScr
 url: "https://devflow-demo.vercel.app"
 featured: true
 techs: ["Next.js", "TypeScript", "MongoDB", "TailwindCSS", "OpenAI"]
---- 
+imagePath: "/images/projects/example.png"
+---
