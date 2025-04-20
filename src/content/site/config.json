@@ -1,11 +1,11 @@
 {
   "home": {
-    "name": "ByteKai",
-    "title": "Software Engineer & Curious Tinkerer",
+    "name": "Kyoumas",
+    "title": "I’m an Industrial Engineer",
     "introduction": "I’m constantly learning and evolving. I love diving into new ideas and finding creative ways to solve problems.",
     "sections": {
       "blog": {
-        "title": "Writing",
+        "title": "Blog",
         "viewAllText": "View all posts"
       },
       "projects": {

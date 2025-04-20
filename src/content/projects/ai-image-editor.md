@@ -4,4 +4,5 @@ description: "An AI-powered image editing tool that allows users to edit photos 
 url: "https://ai-image-editor-pro.vercel.app"
 featured: true
 techs: ["React", "Python", "TensorFlow", "FastAPI", "Docker"]
---- 
+imagePath: "/images/projects/example.png"
+---
