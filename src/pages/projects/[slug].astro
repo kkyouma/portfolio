@@ -31,16 +31,8 @@ const getProjectImagePath = (projectId: string): string => {
   <main>
     <article class="project">
       <header>
-        <div class="metadata">
-          {
-            project.data.publishedAt && (
-              <time datetime={project.data.publishedAt.toISOString()}>
-                {formatDate(project.data.publishedAt)}
-              </time>
-            )
-          }
-        </div>
         <h1>{project.data.title}</h1>
+        <p>{project.data.description}</p>
         {
           project.data.techs && (
             <div class="technologies">
@@ -51,7 +43,9 @@ const getProjectImagePath = (projectId: string): string => {
           )
         }
         <div class="links-section">
-          <span class="feature">Text</span>
+          <span class={`feature ${project.data.featured ? true : false}`}>
+            {project.data.featured ? "Stackholder Project" : "Personal Project"}
+          </span>
           <div>
             <a class="button secondary category-link" href={project.data.url}
               >Preview</a
@@ -84,9 +78,8 @@ const getProjectImagePath = (projectId: string): string => {
 <style>
   main {
     width: 100%;
-    max-width: 800px;
     margin: 0 auto;
-    padding: 2rem 1.5rem;
+    padding: 0rem 1.5rem;
   }
 
   .project {
@@ -106,6 +99,11 @@ const getProjectImagePath = (projectId: string): string => {
     margin-bottom: 1.5rem;
     border-radius: 8px;
     overflow: hidden;
+  }
+
+  span.feature {
+    font-size: 0.8rem;
+    font-weight: 500;
   }
 
   .project-images img {
