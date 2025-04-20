@@ -1,0 +1,170 @@
+---
+import { getCollection, render } from "astro:content";
+import type { GetStaticPaths } from "astro";
+import BaseLayout from "../../components/layout/BaseLayout.astro";
+
+export const getStaticPaths = (async () => {
+  const projects = await getCollection("projects");
+  return projects.map((project) => ({
+    params: { slug: project.id },
+    props: { project },
+  }));
+}) satisfies GetStaticPaths;
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+
+const formatDate = (date: Date) => {
+  return date.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+};
+
+// Function to get project image path
+const getProjectImagePath = (projectId: string): string => {
+  return `/images/projects/${projectId}.png`;
+};
+---
+
+<BaseLayout title={project.data.title} description={project.data.description}>
+  <main>
+    <article class="project">
+      <header>
+        <!-- <div class="project-image"> -->
+        <!--   <img src={project.data.imagePath} alt={project.data.title} /> -->
+        <!-- </div> -->
+        <div class="metadata">
+          {
+            project.data.publishedAt && (
+              <time datetime={project.data.publishedAt.toISOString()}>
+                {formatDate(project.data.publishedAt)}
+              </time>
+            )
+          }
+          {
+            project.data.url && (
+              <a
+                href={project.data.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="project-link"
+              >
+                View Project
+              </a>
+            )
+          }
+        </div>
+        <h1>{project.data.title}</h1>
+        {
+          project.data.techs && (
+            <div class="technologies">
+              {project.data.techs.map((tech: string) => (
+                <span class="tech-tag">{tech}</span>
+              ))}
+            </div>
+          )
+        }
+      </header>
+      <div class="content">
+        <Content />
+      </div>
+    </article>
+  </main>
+</BaseLayout>
+
+<style>
+  main {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+  }
+
+  .project {
+    margin-top: 2rem;
+  }
+
+  header {
+    margin-bottom: 2rem;
+  }
+
+  .project-image {
+    width: 100%;
+    height: auto;
+    margin-bottom: 1.5rem;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
+  }
+
+  .project-image img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+
+  .metadata {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  time {
+    color: var(--text-muted);
+    font-size: var(--text-sm);
+  }
+
+  .project-link {
+    font-size: var(--text-sm);
+    background-color: var(--accent-color, #0ea5e9);
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background-color 0.2s;
+  }
+
+  .project-link:hover {
+    background-color: var(--accent-hover, #0284c7);
+  }
+
+  h1 {
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .technologies {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+  }
+
+  .tech-tag {
+    font-size: var(--text-xs);
+    background-color: var(--tag-bg, rgba(255, 255, 255, 0.1));
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    color: var(--tag-color, rgba(255, 255, 255, 0.8));
+  }
+
+  .content {
+    line-height: 1.7;
+  }
+
+  @media (max-width: 768px) {
+    main {
+      padding: 1rem;
+    }
+
+    .metadata {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+  }
+</style>

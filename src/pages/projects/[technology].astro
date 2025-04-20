@@ -1,0 +1,94 @@
+---
+import ProjectCard from "../../components/ui/ProjectCard.astro";
+import { getCollection } from "astro:content";
+import type { GetStaticPaths } from "astro";
+import type { CollectionEntry } from "astro:content";
+import BaseLayout from "../../components/layout/BaseLayout.astro";
+import Categories from "../../components/shared/Categories.astro";
+import BaseHero from "../../components/shared/BaseHero.astro";
+import Container from "../../components/ui/Container.astro";
+import ContentList from "../../components/shared/ContentList.astro";
+
+type Project = CollectionEntry<"projects">;
+
+export const getStaticPaths = (async () => {
+  const allProjects = await getCollection("projects");
+  const filteredProjects = allProjects.filter((project: Project) =>
+    import.meta.env.PROD ? !project.data.draft : true,
+  );
+
+  // Get all unique technologies from all projects
+  const allTechnologies: string[] = Array.from(
+    new Set(
+      filteredProjects.flatMap((project: Project) => project.data.techs || []),
+    ),
+  ).sort();
+
+  return allTechnologies.map((technology) => {
+    // Filter projects that use this technology
+    const technologyProjects = filteredProjects.filter(
+      (project: Project) =>
+        project.data.techs && project.data.techs.includes(technology),
+    );
+
+    return {
+      params: { technology },
+      props: { technologyProjects, allTechnologies },
+    };
+  });
+}) satisfies GetStaticPaths;
+
+const { technologyProjects, allTechnologies } = Astro.props;
+const currentTechnology = Astro.params.technology;
+
+// Sort projects: featured first, then by date
+const sortedProjects = technologyProjects.sort((a: Project, b: Project) => {
+  // First sort by featured status
+  if (a.data.featured && !b.data.featured) return -1;
+  if (!a.data.featured && b.data.featured) return 1;
+
+  // Then sort by date if available
+  const dateA = a.data.publishedAt?.getTime() || 0;
+  const dateB = b.data.publishedAt?.getTime() || 0;
+  return dateB - dateA;
+});
+
+// Function to get project image path
+function getProjectImagePath(projectId: string): string {
+  return `/images/projects/${projectId}.png`;
+}
+---
+
+<BaseLayout
+  title={`${currentTechnology} Projects`}
+  description={`Projects built with ${currentTechnology}`}
+>
+  <Container>
+    <BaseHero
+      title={`${currentTechnology} Projects`}
+      description={`Projects built with ${currentTechnology}`}
+    />
+
+    <Categories
+      categories={allTechnologies}
+      currentPath={Astro.url.pathname}
+      basePath="projects"
+    />
+
+    <ContentList>
+      {
+        sortedProjects.map((project) => (
+          <ProjectCard
+            title={project.data.title}
+            description={project.data.description}
+            url={project.data.url || `/projects/${project.id}`}
+            tags={project.data.techs}
+            featured={project.data.featured}
+            imagePath={project.data.imagePath}
+            date={project.data.publishedAt}
+          />
+        ))
+      }
+    </ContentList>
+  </Container>
+</BaseLayout>

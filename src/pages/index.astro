@@ -5,6 +5,8 @@ import type { CollectionEntry } from "astro:content";
 import BaseLayout from "../components/layout/BaseLayout.astro";
 import ContentList from "../components/shared/ContentList.astro";
 import Container from "../components/ui/Container.astro";
+import Card from "../components/ui/Card.astro";
+import ProjectCard from "../components/ui/ProjectCard.astro";
 
 const siteConfig = await getEntry("site", "home");
 if (!siteConfig) {
@@ -21,24 +23,16 @@ const formatDate = (date: Date | undefined) => {
   });
 };
 
-const posts = await getCollection("blog", ({ data }: CollectionEntry<"blog">) => {
-  return import.meta.env.PROD ? !data.draft : true;
-});
-const latestPosts = posts
-  .sort(
-    (a: CollectionEntry<"blog">, b: CollectionEntry<"blog">) =>
-      b.data.publishedAt.getTime() - a.data.publishedAt.getTime()
-  )
-  .slice(0, 3);
-
 const experiences = await getCollection("experience");
 const sortedExperiences = experiences.sort(
   (a: CollectionEntry<"experience">, b: CollectionEntry<"experience">) =>
-    b.data.startDate.getTime() - a.data.startDate.getTime()
+    b.data.startDate.getTime() - a.data.startDate.getTime(),
 );
 
 const projects = await getCollection("projects");
-const featuredProjects = projects.filter((project: CollectionEntry<"projects">) => project.data.featured).slice(0, 3);
+const featuredProjects = projects
+  .filter((project: CollectionEntry<"projects">) => project.data.featured)
+  .slice(0, 3);
 ---
 
 <BaseLayout title={`${site.name} - Portfolio`} description={site.introduction}>
@@ -60,54 +54,24 @@ const featuredProjects = projects.filter((project: CollectionEntry<"projects">) 
       }
     </section>
 
-    <Section>
-      <div class="section-header">
-        <h2>{site.sections.blog.title}</h2>
-        <a href="/blog">{site.sections.blog.viewAllText}</a>
-      </div>
-      <ContentList>
-        {
-          latestPosts.map((post) => (
-            <article>
-              <div class="title-row">
-                <a href={`/blog/${post.id}`}>{post.data.title}</a>
-                {post.data.publishedAt && (
-                  <time datetime={post.data.publishedAt.toISOString()}>{formatDate(post.data.publishedAt)}</time>
-                )}
-              </div>
-              <p class="muted-text">{post.data.description}</p>
-            </article>
-          ))
-        }
-      </ContentList>
-    </Section>
-
     <section class="section">
       <div class="section-header">
         <h2>{site.sections.projects.title}</h2>
         <a href="/projects">{site.sections.projects.viewAllText}</a>
       </div>
-      <ContentList>
+      <div class="projects-grid">
         {
           featuredProjects.map((project) => (
-            <article>
-              <div class="title-row">
-                <a href={project.data.url} target="_blank" rel="noopener noreferrer">
-                  {project.data.title}
-                </a>
-              </div>
-              <p class="muted-text">{project.data.description}</p>
-              {project.data.techs && (
-                <div class="tags">
-                  {project.data.techs.map((tech) => (
-                    <span>{tech}</span>
-                  ))}
-                </div>
-              )}
-            </article>
+            <ProjectCard
+              title={project.data.title}
+              description={project.data.description}
+              imagePath={project.data.imagePath || "/api/placeholder/400/300"}
+              url={project.data.url}
+              techs={project.data.techs}
+            />
           ))
         }
-      </ContentList>
+      </div>
     </section>
 
     <section class="section">
@@ -125,7 +89,8 @@ const featuredProjects = projects.filter((project: CollectionEntry<"projects">) 
                   <span>{exp.data.title}</span>
                 </div>
                 <time>
-                  {formatDate(exp.data.startDate)} - {exp.data.current ? "Present" : formatDate(exp.data.endDate)}
+                  {formatDate(exp.data.startDate)} -{" "}
+                  {exp.data.current ? "Present" : formatDate(exp.data.endDate)}
                 </time>
               </div>
               <p class="muted-text">{exp.data.description}</p>
