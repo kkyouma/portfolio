@@ -2,7 +2,7 @@
   "home": {
     "name": "Kyoumas",
     "title": "I’m an Industrial Engineer",
-    "introduction": "I’m constantly learning and evolving. I love diving into new ideas and finding creative ways to solve problems.",
+    "introduction": "With a passion for data analytics, systems, and open source, I bring a blend of technical and creative thinking to collaborative teams.",
     "sections": {
       "blog": {
         "title": "Blog",
@@ -20,11 +20,11 @@
     "socialLinks": [
       {
         "platform": "GitHub",
-        "url": "https://github.com/bytekai"
+        "url": "https://github.com/kkyouma"
       },
       {
-        "platform": "Twitter",
-        "url": "https://x.com/byteekai"
+        "platform": "LinkedIn",
+        "url": "https://www.linkedin.com/in/jorge-troncoso-m/"
       }
     ]
   }
