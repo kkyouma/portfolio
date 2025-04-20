@@ -1,8 +1,8 @@
 ---
-title: "AI Image Editor Pro"
-description: "An AI-powered image editing tool that allows users to edit photos using natural language commands. Built with React, Python, and integrated with various AI models for intelligent image manipulation."
-url: "https://ai-image-editor-pro.vercel.app"
+title: "Supervised Machine Learning Playground"
+description: "This project uses a tree based model trained on weather data to predict rain, with a Streamlit application providing an interactive interface for users to fit the hyperparams and grid search."
+url: "https://tuningmlplayground-6fft9r9obrrzcxitdmp3g9.streamlit.app/"
 featured: true
-techs: ["React", "Python", "TensorFlow", "FastAPI", "Docker"]
-imagePath: "/images/projects/example.png"
+techs: ["Python", "Scikit Learn", "Streamlit", "XGBoost"]
+imagePath: "/images/projects/playground_model_configuration.png"
 ---
