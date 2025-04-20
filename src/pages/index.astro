@@ -1,11 +1,8 @@
 ---
-import Section from "../components/ui/Section.astro";
 import { getCollection, getEntry } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 import BaseLayout from "../components/layout/BaseLayout.astro";
-import ContentList from "../components/shared/ContentList.astro";
 import Container from "../components/ui/Container.astro";
-import Card from "../components/ui/Card.astro";
 import ProjectCard from "../components/ui/ProjectCard.astro";
 
 const siteConfig = await getEntry("site", "home");
