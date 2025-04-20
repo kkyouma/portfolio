@@ -15,14 +15,21 @@ const notes = await getCollection("notes", ({ data }) => {
 });
 
 const categories = [...new Set(notes.map((note: Note) => note.data.category))];
-const sortedNotes = notes.sort((a: Note, b: Note) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime());
+const sortedNotes = notes.sort(
+  (a: Note, b: Note) =>
+    b.data.publishedAt.getTime() - a.data.publishedAt.getTime(),
+);
 ---
 
 <BaseLayout title="Notes" description="Short-form thoughts and learnings">
   <Container>
     <BaseHero title="Notes" description="Short-form thoughts and learnings" />
 
-    <Categories categories={categories} currentPath={Astro.url.pathname} basePath="notes" />
+    <Categories
+      categories={categories}
+      currentPath={Astro.url.pathname}
+      basePath="notes"
+    />
 
     <ContentList>
       {

@@ -11,12 +11,18 @@ type Note = CollectionEntry<"notes">;
 
 export const getStaticPaths = (async () => {
   const allNotes = await getCollection("notes");
-  const filteredNotes = allNotes.filter((note: Note) => (import.meta.env.PROD ? !note.data.draft : true));
+  const filteredNotes = allNotes.filter((note: Note) =>
+    import.meta.env.PROD ? !note.data.draft : true,
+  );
 
-  const allCategories: string[] = Array.from(new Set(filteredNotes.map((note: Note) => note.data.category)));
+  const allCategories: string[] = Array.from(
+    new Set(filteredNotes.map((note: Note) => note.data.category)),
+  );
 
   return allCategories.map((categoryPath) => {
-    const categoryNotes = filteredNotes.filter((note: Note) => note.data.category === categoryPath);
+    const categoryNotes = filteredNotes.filter(
+      (note: Note) => note.data.category === categoryPath,
+    );
 
     return {
       params: { category: categoryPath },
@@ -28,7 +34,8 @@ export const getStaticPaths = (async () => {
 const { categoryNotes, allCategories } = Astro.props;
 
 const sortedNotes = categoryNotes.sort(
-  (a: Note, b: Note) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime()
+  (a: Note, b: Note) =>
+    b.data.publishedAt.getTime() - a.data.publishedAt.getTime(),
 );
 ---
 
@@ -36,7 +43,11 @@ const sortedNotes = categoryNotes.sort(
   <main>
     <Container>
       <BaseHero title="Notes" description="Short-form thoughts and learnings" />
-      <Categories categories={allCategories} currentPath={Astro.url.pathname} basePath="notes" />
+      <Categories
+        categories={allCategories}
+        currentPath={Astro.url.pathname}
+        basePath="notes"
+      />
 
       <div class="content-list">
         {
