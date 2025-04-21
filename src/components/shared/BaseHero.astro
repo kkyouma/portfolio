@@ -2,18 +2,82 @@
 interface Props {
   title: string;
   description: string;
+  imageUrl?: string;
+  imageAlt?: string;
 }
 
-const { title, description } = Astro.props;
+const {
+  title,
+  description,
+  imageUrl,
+  imageAlt = "Profile picture",
+} = Astro.props;
 ---
 
 <section class="hero">
-  <h1>{title}</h1>
-  <p class="subtitle">{description}</p>
+  <div class="hero-content">
+    <div class="hero-text">
+      <h1>{title}</h1>
+      <p class="subtitle">{description}</p>
+      <slot name="additional-content" />
+    </div>
+    {
+      imageUrl && (
+        <div class="hero-image-container">
+          <img
+            src={imageUrl}
+            alt={imageAlt}
+            width="150"
+            height="150"
+            class="hero-image"
+            loading="eager"
+          />
+        </div>
+      )
+    }
+  </div>
 </section>
 
 <style>
   .hero {
-    padding: 4rem 0;
+    padding: 0;
+    margin: 0 auto;
+  }
+
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  @media (min-width: 640px) {
+    .hero-content {
+      flex-direction: row;
+      align-items: center;
+      gap: 4rem;
+    }
+  }
+
+  .hero-image-container {
+    flex-shrink: 0;
+  }
+
+  .hero-image {
+    width: 250px;
+    height: 280px;
+    border-radius: 20%;
+    object-fit: cover;
+    border: 1px solid var(--border-color);
+  }
+
+  .hero-text {
+    text-align: center;
+  }
+
+  @media (min-width: 640px) {
+    .hero-text {
+      text-align: left;
+    }
   }
 </style>

@@ -7,8 +7,7 @@ export const SITE = {
     name: "Kyoumas",
     title: "Industrial Engineer",
     description: "Personal portfolio",
-  // IMPORTANT: change URL
-    url: "https://bytekai.dev",
+    url: "https://kyoumas.netlify.app/",
     defaultImage: "/default-og-image.jpg",
 } as const;
 
