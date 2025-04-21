@@ -44,14 +44,14 @@ const getProjectImagePath = (projectId: string): string => {
         }
         <div class="links-section">
           <span class={`feature ${project.data.featured ? true : false}`}>
-            {project.data.featured ? "Stackholder Project" : "Personal Project"}
+            {project.data.featured ? "Stakeholder Project" : "Personal Project"}
           </span>
           <div>
             <a class="button secondary category-link" href={project.data.url}
               >Preview</a
             >
             <a
-              href={project.data.url}
+              href={project.data.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
               class="button primary category-link"

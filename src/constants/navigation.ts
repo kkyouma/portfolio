@@ -9,9 +9,4 @@ export const NAVIGATION: Navigation = [
     name: "Projects",
     path: "/projects",
   },
-  {
-    name: "Blog",
-    path: "/blog",
-  },
 ];
-
