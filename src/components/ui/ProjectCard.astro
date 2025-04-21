@@ -3,6 +3,7 @@ interface Props {
   title: string;
   description?: string;
   url: string;
+  githubUrl?: string;
   date?: Date;
   tags?: string[];
   imageUrl?: string; // Optional URL for remote images
@@ -21,6 +22,7 @@ const {
   imagePath,
   techs,
   featured,
+  github,
 } = Astro.props;
 import { formatDate } from "../../utils/date";
 
@@ -48,6 +50,7 @@ const imageSource =
           </div>
         )
       }
+      <a class="button primary category-link" href={github}>Button</a>
     </div>
   </div>
 </article>

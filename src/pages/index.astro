@@ -63,8 +63,9 @@ const featuredProjects = projects
               title={project.data.title}
               description={project.data.description}
               imagePath={project.data.imagePath || "/api/placeholder/400/300"}
-              url={project.data.url}
+              url={`/projects/${project.id}`}
               techs={project.data.techs}
+              githubUrl={project.data.githubUrl || "https://github.com/kkyouma"}
             />
           ))
         }
