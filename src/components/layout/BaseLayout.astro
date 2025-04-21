@@ -14,6 +14,7 @@ import interMediumWoff2 from "@fontsource/inter/files/inter-latin-500-normal.wof
 import robotoMonoRegularWoff2 from "@fontsource/roboto-mono/files/roboto-mono-latin-400-normal.woff2?url";
 import { ClientRouter } from "astro:transitions";
 import Navigation from "../shared/Navigation.astro";
+import ThemeToggle from "../ui/ThemeToggle.astro";
 
 interface Props {
   title: string;
@@ -35,8 +36,25 @@ const {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{title}</title>
+    <meta name="color-scheme" content="dark light" />
     <meta name="description" content={description} />
+    <title>{title}</title>
+
+    <!-- Script to prevent theme flash during page load -->
+    <script is:inline>
+      // Immediately set theme on page load to prevent flash
+      const savedTheme = localStorage.getItem("theme");
+      if (savedTheme) {
+        document.documentElement.classList.add(savedTheme);
+        document.documentElement.setAttribute(
+          "data-theme",
+          savedTheme === "light-theme" ? "light" : "dark",
+        );
+      } else {
+        document.documentElement.classList.add("system-theme");
+        document.documentElement.setAttribute("data-theme", "dark"); // Default to dark
+      }
+    </script>
 
     <!-- Preload critical fonts -->
     <link
@@ -86,12 +104,14 @@ const {
     <meta name="generator" content={Astro.generator} />
     <ClientRouter />
     <script is:inline>
-      // Always use dark theme
-      document.documentElement.setAttribute("data-theme", "dark");
-
       // Handle theme persistence during view transitions
       document.addEventListener("astro:before-swap", (ev) => {
-        ev.newDocument.documentElement.setAttribute("data-theme", "dark");
+        const currentTheme =
+          document.documentElement.getAttribute("data-theme");
+        ev.newDocument.documentElement.setAttribute(
+          "data-theme",
+          currentTheme || "dark",
+        );
       });
 
       // Add initial-load class
@@ -110,6 +130,9 @@ const {
     <main>
       <div class="nav-container">
         <Navigation />
+        <div class="theme-toggle-container">
+          <ThemeToggle />
+        </div>
       </div>
       <main><slot /></main>
     </main>
