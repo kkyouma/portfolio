@@ -41,6 +41,7 @@ const projects = defineCollection({
     featured: z.boolean().optional().default(false),
     techs: z.array(z.string()).optional(),
     imagePath: z.string(),
+    githubUrl: z.string().url(),
   }),
 });
 
@@ -113,4 +114,3 @@ export const collections = {
   notes,
   bookmarks,
 };
-
