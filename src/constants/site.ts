@@ -4,9 +4,10 @@ export type NavigationItem = {
 };
 
 export const SITE = {
-    name: "ByteKai",
-    title: "Software Engineer & Curious Tinkerer",
-    description: "Personal portfolio and blog",
+    name: "Kyoumas",
+    title: "Industrial Engineer",
+    description: "Personal portfolio",
+  // IMPORTANT: change URL
     url: "https://bytekai.dev",
     defaultImage: "/default-og-image.jpg",
 } as const;
@@ -19,6 +20,7 @@ export const NAVIGATION: {
         { name: "Blog", path: "/blog" },
         { name: "Notes", path: "/notes" },
         { name: "Bookmarks", path: "/bookmarks" }
+        { name: "Projects", path: "/projects" }
     ],
 } as const;
 

@@ -30,6 +30,10 @@ const projects = await getCollection("projects");
 const featuredProjects = projects
   .filter((project: CollectionEntry<"projects">) => project.data.featured)
   .slice(0, 3);
+
+const otherProjects = projects
+  .filter((project: CollectionEntry<"projects">) => !project.data.featured)
+  .slice(0, 3);
 ---
 
 <BaseLayout title={`${site.name} - Portfolio`} description={site.introduction}>

@@ -2,6 +2,7 @@
 title: "MyAnimeList Web Scraper"
 description: "Personal Web scraping project (Unguided) to extract anime and manga data."
 url: "https://github.com/kkyouma/myanimelist_scraper"
+githubUrl: "https://github.com/kkyouma/myanimelist_scraper"
 featured: true
 techs: ["Python", "Beautiful Soup", "Requests"]
 imagePath: "/images/projects/myanimelist-web-scraper.png"

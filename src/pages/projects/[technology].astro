@@ -81,7 +81,7 @@ function getProjectImagePath(projectId: string): string {
           <ProjectCard
             title={project.data.title}
             description={project.data.description}
-            url={project.data.url || `/projects/${project.id}`}
+            url={`/projects/${project.id}`}
             tags={project.data.techs}
             featured={project.data.featured}
             imagePath={project.data.imagePath}
