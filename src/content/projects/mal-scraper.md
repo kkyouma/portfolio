@@ -4,13 +4,13 @@ description: "Personal Web scraping project (Unguided) to extract anime and mang
 url: "https://github.com/kkyouma/myanimelist_scraper"
 githubUrl: "https://github.com/kkyouma/myanimelist_scraper"
 featured: false
-techs: ["Python", "Beautiful Soup", "Requests"]
+techs: ["Python", "Pandas", "Beautiful Soup", "Requests"]
 imagePath: "/images/projects/myanimelist-web-scraper.png"
 ---
 
 ## Project Purpose
 
-This project demonstrates the ability to **extract, structure, and analyze web data** at scale. By scraping [MyAnimeList](https://myanimelist.net/) (a top anime and manga database), it transforms unstructured website content into actionable datasets, showcasing skills in automation, problem-solving, and data pipeline creation.
+This project search for **extract, structure, and analyze web data** at scale. By scraping [MyAnimeList](https://myanimelist.net/) (a top anime and manga database), it transforms unstructured website content into actionable datasets, showcasing skills in automation, problem-solving, and data pipeline creation.
 
 ## Why MyAnimeList?
 
