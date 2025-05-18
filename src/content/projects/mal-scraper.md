@@ -4,7 +4,7 @@ description: "Personal Web scraping project (Unguided) to extract anime and mang
 url: "https://github.com/kkyouma/myanimelist_scraper"
 githubUrl: "https://github.com/kkyouma/myanimelist_scraper"
 featured: false
-techs: ["Python", "Pandas", "Beautiful Soup", "Requests"]
+techs: ["Python", "Pandas", "Beautiful Soup", "Requests", "Web Scraping"]
 imagePath: "/images/projects/myanimelist-web-scraper.png"
 ---
 

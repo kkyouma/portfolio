@@ -64,7 +64,28 @@ const otherProjects = projects
   <Container>
     <section class="section">
       <div class="section-header">
-        <h2>{site.sections.projects.title}</h2>
+        <h2>Stakeholders Projects</h2>
+        <a href="/projects">{site.sections.projects.viewAllText}</a>
+      </div>
+      <div class="projects-grid">
+        {
+          featuredProjects.map((project) => (
+            <ProjectCard
+              title={project.data.title}
+              description={project.data.description}
+              imagePath={project.data.imagePath || "/api/placeholder/400/300"}
+              url={`/projects/${project.id}`}
+              techs={project.data.techs}
+              githubUrl={project.data.githubUrl || "https://github.com/kkyouma"}
+            />
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-header">
+        <h2>Personal Projects</h2>
         <a href="/projects">{site.sections.projects.viewAllText}</a>
       </div>
       <div class="projects-grid">

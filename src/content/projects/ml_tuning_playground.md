@@ -4,7 +4,7 @@ description: "This project uses a tree based model trained on weather data to pr
 url: "https://tuningmlplayground-6fft9r9obrrzcxitdmp3g9.streamlit.app/"
 githubUrl: "https://github.com/kkyouma/tuning_ml_playground"
 featured: false
-techs: ["Python", "Scikit Learn", "Streamlit", "XGBoost"]
+techs: ["Python", "Scikit Learn", "Streamlit", "XGBoost", "Machine Learning"]
 imagePath: "/images/projects/playground_model_configuration.png"
 ---
 
